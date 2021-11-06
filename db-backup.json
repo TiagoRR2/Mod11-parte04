@@ -23,7 +23,7 @@
       "user_subscriptions": []
     },
     {
-      "id": 1,
+      "id": 2,
       "username": "tiago",
       "password_hash": "$2a$12$Vmo2yqSuwFcCycVQAKHTFOPoaTYfiGLwPvdoSyqZJf/E6w/35ALcC",
       "fullname": "Tiago",
@@ -53,5 +53,8 @@
       "is_active": false,
       "subscribers": []
     }
+  ],
+  "Tokens": [
+    
   ]
 }

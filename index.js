@@ -85,7 +85,6 @@ app.post("/login", async (req, res) => {
 
 app.post("/register", async (req, res) => {
   if (req.authenticationInfo) {
-    res.cookie("auth", req.authenticationInfo.authToken);
     return res.status(200).json("Já está logado");
   }
 
@@ -152,19 +151,23 @@ app.post("/register", async (req, res) => {
   return res.status(200).json(publicUser)
 });
 
-//////////=====================================================================
-/////===== ROTAS QUE PRECISAM DE AUTENTICAÇÃO
-//////////=====================================================================
-/////===== ROTAS POST
+////////=====================================================================
+///===== ROTAS QUE PRECISAM DE AUTENTICAÇÃO
+////////=====================================================================
+///===== ROTAS POST
 
-// app.use((req, res, next) => {
-//   if (!req.authenticationInfo) {
-//     return res.status(400).json("Usuário não está logado");
-//   }
-//   next()
-// })
+app.use((req, res, next) => {
+  if (!req.authenticationInfo) {
+    return res.status(400).json("Usuário não está logado");
+  }
+  next()
+})
 
 app.post("/events", async (req, res) => {
+  if (!req.authenticationInfo.is_admin) {
+    return res(400).json("É necessário ser admin para criar um evento")
+  }
+
   await db.read()
 
   const id = db.data.Events.length
@@ -193,9 +196,9 @@ app.post("/events", async (req, res) => {
 
 
 
-
+//TODO
 app.post("/events/:id/subscribe", (req, res) => {});
-
+//TODO
 app.post("/checkin", (req, res) => {});
 
 
@@ -206,9 +209,11 @@ app.post("/checkin", (req, res) => {});
 app.post("/logout", (req, res) => {
   const userId = req.authenticationInfo.user_id
 
-  const tokenInfo = tokensList.findIndex(tokenObj => {
+  const tokenInfoIndex = tokensList.findIndex(tokenObj => {
     return tokenObj.user_id === userId
   })
+
+  tokensList.splice(tokenInfoIndex, 1)
   
   res.clearCookie("auth", req.authenticationInfo.authToken)
   return res.status(200).json("Logout ok")
@@ -262,14 +267,16 @@ app.get("/profile", async (req, res) => {
   
   const user = db.data.Users[req.authenticationInfo.user_id]
   const publicUsersInfo = userslist.map(user => {
-    const {password_hash, is_admin, ...publicUser} = user
+    const {password_hash, ...publicUser} = user
     return publicUser
   })
   
   return res.status(200).json(publicUserInfo)
 })
 
+//TODO
 app.get("/events/:id/subscribers", async (req, res) => {});
+//TODO
 app.get("/users/:id/subscriptions", async (req, res) => {});
 
 app.listen(3000, () => console.log("server up"));
