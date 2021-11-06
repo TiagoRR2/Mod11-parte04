@@ -1,0 +1,57 @@
+{
+  "Users": [
+    {
+      "id": 0,
+      "username": "admin",
+      "password_hash": "$2a$12$Vmo2yqSuwFcCycVQAKHTFOPoaTYfiGLwPvdoSyqZJf/E6w/35ALcC",
+      "fullname": "Admin Amnistroso",
+      "email": "admin@admin.com",
+      "phone": "999999999",
+      "address": "rua a, 123",
+      "is_admin": true,
+      "user_subscriptions": []
+    },
+    {
+      "id": 1,
+      "username": "adriano",
+      "password_hash": "$2a$12$Vmo2yqSuwFcCycVQAKHTFOPoaTYfiGLwPvdoSyqZJf/E6w/35ALcC",
+      "fullname": "Adriano",
+      "email": "admin@admin.com",
+      "phone": "999999999",
+      "address": "rua a, 123",
+      "is_admin": false,
+      "user_subscriptions": []
+    },
+    {
+      "id": 2,
+      "username": "tiago",
+      "password_hash": "$2a$12$Vmo2yqSuwFcCycVQAKHTFOPoaTYfiGLwPvdoSyqZJf/E6w/35ALcC",
+      "fullname": "Tiago",
+      "email": "admin@admin.com",
+      "phone": "999999999",
+      "address": "rua a, 123",
+      "is_admin": false,
+      "user_subscriptions": []
+    }
+  ],
+  "Events": [
+    {
+      "id": 0,
+      "title": "Aniversário",
+      "description": "Aniversário coletivo de todas as pessoas que não fizeram festa durante a pandemia",
+      "date": "2021-11-06T19:00:00",
+      "created_by": "0",
+      "is_active": true,
+      "subscribers": []
+    },
+    {
+      "id": 1,
+      "title": "Big Bang",
+      "description": "💥",
+      "date_and_time": "2021-02-02T00:00:00",
+      "created_by": "0",
+      "is_active": false,
+      "subscribers": []
+    }
+  ]
+}
