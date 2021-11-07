@@ -13,7 +13,6 @@ export async function listAllUsers() {
       user_subscriptions: user.user_subscriptions,
     };
   });
-  await db.write();
   return usersList;
 }
 
@@ -22,14 +21,12 @@ export async function findUserByUsername(username) {
   const user = db.data.Users.find((_user) => {
     return username === _user.username;
   });
-  await db.write();
   return user;
 }
 
 export async function findUserById(user_id) {
   await db.read();
   const user = db.data.Users[user_id];
-  await db.write();
   return user;
 }
 
@@ -43,20 +40,25 @@ export async function createNewUser({
 }) {
   await db.read();
 
-  let userAlreadyExists = db.data.Users((user) => {
-    return username === user.username;
+  const userAlreadyExists = db.data.Users.find((user) => {
+    if (req.body.username === user.username) {
+      user.match = "username";
+      return user;
+    }
+    if (req.body.email === user.email) {
+      user.match = "email";
+      return user;
+    }
   });
 
   if (userAlreadyExists) {
-    return new Error("Nome de usuário já existe");
-  }
-
-  userAlreadyExists = db.data.Users((user) => {
-    return username === user.username;
-  });
-
-  if (userAlreadyExists) {
-    return new Error("Email já cadastrado");
+    if (userAlreadyExists.match === "username") {
+      return new Error("Nome de usuário já existe");
+    }
+    if (userAlreadyExists.match === "email") {
+      return new Error("Email já cadastrado");
+    }
+    return new Error("Erro de cadastro. Tente novamente");
   }
 
   const id = db.data.Users.length();
@@ -76,14 +78,4 @@ export async function createNewUser({
   db.data.Users.push(user);
   await db.write();
   return user;
-}
-
-export async function listUserEvents(user_id) {
-  await db.read();
-  const user = db.data.Users[user_id];
-  const eventsList = user.user_subscriptions.map(
-    (subscription) => db.data.Events[subscription.event_id]
-  );
-  await db.write();
-  return eventsList;
 }

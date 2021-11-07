@@ -1,6 +1,7 @@
 import { findUserByUsername } from "../database/manager/User.js";
 import bcrypt from "bcrypt"
 import {randomBytes} from "crypto"
+import { createAuthToken } from "../database/manager/AuthTokens.js";
 
 export default async function authenticationService ({username, password}) {
   const user = await findUserByUsername(username)
@@ -17,9 +18,7 @@ export default async function authenticationService ({username, password}) {
 
   const token = await randomBytes(64).toString('hex')
 
-  return {
-    token,
-    id: user.id,
-    admin: user.is_admin
-  }
+  const authenticationObj = await createAuthToken(user.id, token)
+
+  return authenticationObj
 }

@@ -17,14 +17,13 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 /////=====DATABASE
 import db from "./database/db-init.js";
 await db.read();
-db.data ||= { Users: [], Events: [] };
+db.data ||= { Users: [], Events: [], AuthTokens: [] };
 await db.write();
 
 /////=====MIDDLEWARES
 app.use(logger("common"));
 app.use(express.json());
 app.use(cookieParser())
-app.use(express.static(join(__dirname, "public")));
 
 /////=====ROUTES
 app.use(routes);
