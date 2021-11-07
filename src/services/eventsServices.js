@@ -1,4 +1,4 @@
-import { createNewEvent, endEvent, findEventById, listAllEvents } from "../database/manager/Events";
+import { createNewEvent, endEvent, findEventById, listAllEvents } from "../database/manager/Events.js";
 
 export async function createEventService (user_id, ...newEventInfo) {
 

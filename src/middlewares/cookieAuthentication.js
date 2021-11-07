@@ -1,4 +1,4 @@
-import { findToken } from "../src/database/manager/AuthTokens";
+import { findToken } from "../database/manager/AuthTokens.js";
 
 export default async function authenticationMiddleware(req, res, next) {
   if (req.cookies.auth) {

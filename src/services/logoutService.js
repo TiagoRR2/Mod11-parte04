@@ -1,4 +1,4 @@
-import { deleteToken } from "../database/manager/AuthTokens"
+import { deleteToken } from "../database/manager/AuthTokens.js"
 
 export default (token) => {
   const logout = deleteToken()

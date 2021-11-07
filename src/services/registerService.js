@@ -1,4 +1,4 @@
-import { createNewUser } from "../database/manager/User";
+import { createNewUser } from "../database/manager/User.js";
 import bcrypt from "bcrypt"
 const saltRounds = process.env.saltRounds || 12
 

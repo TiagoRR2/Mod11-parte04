@@ -1,7 +1,7 @@
 import express from "express";
 import authenticationService from "./services/authenticationService.js";
-import cookieAuthenticationMiddleware from "./middlewares/cookieAuthentication";
-import cookieAuthorizationMiddleware from "./middlewares/cookieAuthorization";
+import cookieAuthenticationMiddleware from "./middlewares/cookieAuthentication.js";
+import cookieAuthorizationMiddleware from "./middlewares/cookieAuthorization.js";
 import registerService from "./services/registerService.js";
 import { createEventService, endEventService, getAllEventsInfoService, getEventInfoByIdService } from "./services/eventsServices.js";
 import logoutService from "./services/logoutService.js";
@@ -12,7 +12,7 @@ const routes = express.Router();
 /////===== MIDDLEWARE DE AUTENTICAÇÃO
 //////////=====================================================================
 
-app.use(cookieAuthenticationMiddleware);
+routes.use(cookieAuthenticationMiddleware);
 
 //////////=====================================================================
 /////===== ROTAS QUE NÃO PRECISAM DE AUTENTICAÇÃO
@@ -63,7 +63,7 @@ routes.post("/register", async (req, res) => {
 
 /////===== ROTAS POST
 
-app.use(cookieAuthorizationMiddleware);
+routes.use(cookieAuthorizationMiddleware);
 
 routes.post("/events", async (req, res) => {
   if (!req.authenticationInfo.is_admin) {

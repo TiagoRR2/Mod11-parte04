@@ -1,4 +1,4 @@
-import { findUserById, listAllUsers } from "../database/manager/User";
+import { findUserById, listAllUsers } from "../database/manager/User.js";
 
 export async function getAllUsersInfoService() {
   const usersList = await listAllUsers()
