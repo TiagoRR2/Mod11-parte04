@@ -20,10 +20,16 @@ db.data ||= { Users: [], Events: [], AuthTokens: [] };
 await db.write();
 
 /////=====MIDDLEWARES
-app.use(cors())
+app.use(cors({
+  origin: "http://localhost:5000",
+  allowedHeaders: true,
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization']
+}))
 app.use(logger("common"));
 app.use(express.json());
 app.use(cookieParser())
+app.use((req, res, next) => {console.log(req.body); next()})
 
 /////=====ROUTES
 app.use(routes);
