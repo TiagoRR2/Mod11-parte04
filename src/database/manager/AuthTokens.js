@@ -11,7 +11,7 @@ export async function createAuthToken(user_id, token) {
     token: token
   }
 
-  db.AuthTokens.push(authObj)
+  db.data.AuthTokens.push(authObj)
   await db.write()
 
   return authObj
@@ -34,7 +34,7 @@ export async function deleteToken(token) {
     return token === _tokenObj.token
   })
 
-  if (!tokenObj) {
+  if (!tokenObjIndex || tokenObjIndex === -1) {
     return new Error("Token de autenticação inválido")
   }
 

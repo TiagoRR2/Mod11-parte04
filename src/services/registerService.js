@@ -1,4 +1,5 @@
 import { createNewUser } from "../database/manager/User.js";
+import {randomBytes} from "crypto"
 import bcrypt from "bcrypt"
 const saltRounds = process.env.saltRounds || 12
 

@@ -6,13 +6,21 @@ import registerService from "./services/registerService.js";
 import { createEventService, endEventService, getAllEventsInfoService, getEventInfoByIdService } from "./services/eventsServices.js";
 import logoutService from "./services/logoutService.js";
 import { getAllUsersInfoService, getUserInfoByIdService } from "./services/usersService.js";
+import { listEventSubscribersService, listUserSubscriptionsService, subscribeService } from "./services/subscriptionsService.js";
+import checkInService from "./services/checkinService.js";
 const routes = express.Router();
 
 //////////=====================================================================
 /////===== MIDDLEWARE DE AUTENTICAÇÃO
 //////////=====================================================================
 
+
 routes.use(cookieAuthenticationMiddleware);
+
+routes.use((req, res, next) => {
+  console.log(req.authenticationInfo)
+  next()
+})
 
 //////////=====================================================================
 /////===== ROTAS QUE NÃO PRECISAM DE AUTENTICAÇÃO
@@ -84,26 +92,35 @@ routes.post("/events", async (req, res) => {
   return res.status(200).json(result)
 });
 
+routes.post("/events/:id/subscribe", async (req, res) => {
+  const user_id = req.authenticationInfo.user_id
+  const event_id = req.params.id
 
+  const result = await subscribeService(user_id, event_id)
 
+  if (result instanceof Error) {
+    return res.status(400).json({message: result.message})
+  }
 
-
-
-routes.post("/events/:id/subscribe", async (req, res) => {});
+  return res.status(200).json({qrCodeToken: result})
+});
 
 routes.post("/checkin", async (req, res) => {
   if (!req.authenticationInfo.is_admin) {
     return res.status(400).json("Somente um admin pode acessar esse recurso");
   }
+
+  const result = await checkInService(req.authenticationInfo.user_id)
+
+  if (result instanceof Error) {
+    return res.status(400).json({message: result.message})
+  }
+
+  return res.status(200).json(result)
 });
 
 
-
-
-
-
-
-routes.post("/event/:id/end", async (req, res) => {
+routes.post("/events/:id/end", async (req, res) => {
   if (!req.authenticationInfo.is_admin) {
     return res.status(400).json("É necessário ser admin para encerrar um evento");
   }
@@ -181,10 +198,25 @@ routes.get("/profile", async (req, res) => {
   return res.status(200).json(result)
 });
 
+routes.get("/users/:id/subscriptions", async (req, res) => {
+  const user_id = req.params.id
+
+  const result = await listUserSubscriptionsService(user_id)
+  
+  return res.status(200).json(result)
+});
+
+routes.get("/events/:id/subscribers", async (req, res) => {
+  const event_id = req.params.id
+
+  const result = await listEventSubscribersService(event_id)
+
+  return res.status(200).json(result)
+});
 
 
-
-routes.get("/users/:id/subscriptions", async (req, res) => {});
-routes.get("/events/:id/subscribers", async (req, res) => {});
+routes.use((req, res, next) =>{
+  res.status(404).json({message: "Verifique a URI e tente novamente"})
+})
 
 export default routes;

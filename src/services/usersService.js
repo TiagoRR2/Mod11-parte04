@@ -3,8 +3,8 @@ import { findUserById, listAllUsers } from "../database/manager/User.js";
 export async function getAllUsersInfoService() {
   const usersList = await listAllUsers()
 
-  const publicUsersInfo = userslist.map(user => {
-    const {password_hash, is_admin, ...publicUser} = user
+  const publicUsersInfo = usersList.map(user => {
+    const {password_hash, ...publicUser} = user
     return publicUser
   })
 
@@ -18,7 +18,7 @@ export async function getUserInfoByIdService(id) {
     return new Error("O usuário especificado não existe.")
   }
 
-  const {password_hash, is_admin, ...publicUserInfo} = user
+  const {password_hash, ...publicUserInfo} = user
   
   return publicUserInfo
 }

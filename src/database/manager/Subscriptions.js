@@ -1,6 +1,6 @@
 import db from "../db-init.js";
 
-export async function subscribeUserToEvent(user_id, event_id, token) {
+export async function subscribeUserToEvent({user_id, event_id, token}) {
   await db.read();
   const event = db.data.Events[event_id];
   const user = db.data.Users[user_id];
@@ -34,27 +34,30 @@ export async function userCheckIn(user_id, token) {
   await db.read();
   const user = db.data.Users[user_id];
 
-  const validToken = user.user_subscriptions.find((subscription) => {
+  const checkTokenIndex = user.user_subscriptions.findIndex((subscription) => {
     return token === subscription.token;
   });
 
-  if (!validToken) {
+  if (!checkTokenIndex || checkTokenIndex == -1) {
     return new Error("Token de checkin inválido");
   }
 
-  if (validToken.checked_in) {
+  const subscription = user.user_subscriptions[validTokenIndex]
+  
+  if (subscription.checked_in) {
     return new Error("Usuário já fez check-in");
   }
 
-  validToken.checked_in = true;
+  subscription.checked_in = true;
 
-  return user;
+  return user.subscription;
 }
 
 
 export async function listUserSubscriptions (user_id) {
   await db.read();
   const user = db.data.Users[user_id];
+
   const eventsList = user.user_subscriptions.map(
     (subscription) => db.data.Events[subscription.event_id]
   );
@@ -64,9 +67,9 @@ export async function listUserSubscriptions (user_id) {
 export async function listEventSubscribers(event_id) {
   await db.read();
   const event = db.data.Events[event_id];
+  
   const subscribersList = event.subscribers.map(
     (subscriber_id) => db.data.Users[subscriber_id]
   );
-  await db.write();
   return subscribersList;
 }

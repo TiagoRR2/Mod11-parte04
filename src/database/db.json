@@ -54,5 +54,21 @@
       "subscribers": []
     }
   ],
-  "AuthTokens": []
+  "AuthTokens": [
+    {
+      "user_id": 2,
+      "is_admin": false,
+      "token": "73ebfb183e7b3fc1093e7d6f03af733309879f151726de0c53b0231867d3fe85c422e2f33bc4fb368d6a2c56939f6d0aa84178300c8259bb493ec99afb2f6340"
+    },
+    {
+      "user_id": 2,
+      "is_admin": false,
+      "token": "0fd59d99b880ae48ec031d7ce1e3ba450402eaf6065740b1ec47d3f823191ea9491c26ff7b44b73910fc47554306266f4be07d7e2b367db047858182b13d4df4"
+    },
+    {
+      "user_id": 2,
+      "is_admin": false,
+      "token": "cfb4f348975b517160c6835d644f6425a6bf05c7b4a49a3757d836191a8b2735272702ccdacb86da17d93461b0c0ece7e924a298386e5f38d6bb27e40a2e51db"
+    }
+  ]
 }

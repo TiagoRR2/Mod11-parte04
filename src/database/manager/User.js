@@ -2,17 +2,7 @@ import db from "../db-init.js";
 
 export async function listAllUsers() {
   await db.read();
-  const usersList = db.data.Users.map((user) => {
-    return {
-      id: user.id,
-      username: user.username,
-      fullname: user.fullname,
-      email: user.email,
-      phone: user.phone,
-      address: user.address,
-      user_subscriptions: user.user_subscriptions,
-    };
-  });
+  const usersList = db.data.Users
   return usersList;
 }
 
