@@ -1,10 +1,9 @@
 /////=====DEPENDENCIES
 import express from "express";
 import logger from "morgan";
-import {join, dirname} from "path";
-import { fileURLToPath } from 'url'
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv"
+import cors from "cors"
 
 import routes from "./routes.js";
 dotenv.config()
@@ -12,7 +11,6 @@ dotenv.config()
 /////=====VARIABLES
 const app = express();
 const port = process.env.PORT || 3000;
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /////=====DATABASE
 import db from "./database/db-init.js";
@@ -21,6 +19,7 @@ db.data ||= { Users: [], Events: [], AuthTokens: [] };
 await db.write();
 
 /////=====MIDDLEWARES
+app.use(cors())
 app.use(logger("common"));
 app.use(express.json());
 app.use(cookieParser())

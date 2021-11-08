@@ -31,7 +31,13 @@
       "phone": "999999999",
       "address": "rua a, 123",
       "is_admin": false,
-      "user_subscriptions": []
+      "user_subscriptions": [
+        {
+          "event_id": "0",
+          "checked_in": false,
+          "token": "b962b745f8007b0a2468680d629b45a1695eead6ad20f60add473df00cbc0cced510b44fd6cab9d7776abdacdcb8c95476ba5aadedd91333f6642dae2cd36b85"
+        }
+      ]
     }
   ],
   "Events": [
@@ -42,7 +48,9 @@
       "date": "2021-11-06T19:00:00",
       "created_by": "0",
       "is_active": true,
-      "subscribers": []
+      "subscribers": [
+        2
+      ]
     },
     {
       "id": 1,
@@ -69,6 +77,11 @@
       "user_id": 2,
       "is_admin": false,
       "token": "cfb4f348975b517160c6835d644f6425a6bf05c7b4a49a3757d836191a8b2735272702ccdacb86da17d93461b0c0ece7e924a298386e5f38d6bb27e40a2e51db"
+    },
+    {
+      "user_id": 2,
+      "is_admin": false,
+      "token": "f8c5f3a9f23c15a1659c065f1cbbb67205eca9a5652d850a43d8ed2c30b7627a20ccfd1bfa6dfc88bb45440fc0124099ceff0825aac771424f00337cbba8955f"
     }
   ]
 }
