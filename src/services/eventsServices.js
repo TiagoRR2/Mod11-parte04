@@ -1,13 +1,10 @@
 import { createNewEvent, endEvent, findEventById, listAllEvents } from "../database/manager/Events.js";
 
-export async function createEventService (user_id, ...newEventInfo) {
+export async function createEventService (newEventInfo) {
 
   //TODO: validate req info
 
-  newEventInfo.creator_id = user_id
-
   const newEvent = await createNewEvent(newEventInfo)
-
   if (newEvent instanceof Error) {
     return new Error(newEvent.message)
   }

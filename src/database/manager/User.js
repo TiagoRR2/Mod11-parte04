@@ -31,11 +31,11 @@ export async function createNewUser({
   await db.read();
 
   const userAlreadyExists = db.data.Users.find((user) => {
-    if (req.body.username === user.username) {
+    if (username === user.username) {
       user.match = "username";
       return user;
     }
-    if (req.body.email === user.email) {
+    if (email === user.email) {
       user.match = "email";
       return user;
     }
@@ -51,7 +51,7 @@ export async function createNewUser({
     return new Error("Erro de cadastro. Tente novamente");
   }
 
-  const id = db.data.Users.length();
+  const id = db.data.Users.length;
 
   const user = {
     id,

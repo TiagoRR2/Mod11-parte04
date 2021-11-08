@@ -17,10 +17,6 @@ const routes = express.Router();
 
 routes.use(cookieAuthenticationMiddleware);
 
-routes.use((req, res, next) => {
-  console.log(req.authenticationInfo)
-  next()
-})
 
 //////////=====================================================================
 /////===== ROTAS QUE NÃO PRECISAM DE AUTENTICAÇÃO
@@ -45,7 +41,7 @@ routes.post("/login", async (req, res) => {
 
 routes.post("/register", async (req, res) => {
   if (req.authenticationInfo) {
-    return res.status(200).json({ message: "Já está logado" });
+    return res.status(200).json({ message: "Já existe um usuário logado. Faça logout para registrar um novo usuário." });
   }
 
   const result = await registerService({
@@ -79,13 +75,12 @@ routes.post("/events", async (req, res) => {
   }
 
   const result = await createEventService(
-    req.authenticationInfo.user_id,
     {
       title: req.body.title,
       description: req.body.description,
       date_and_time: req.body.date_and_time,
       location: req.body.location,
-      creator_id,
+      creator_id: req.authenticationInfo.user_id,
     }
   );
 
@@ -102,15 +97,20 @@ routes.post("/events/:id/subscribe", async (req, res) => {
     return res.status(400).json({message: result.message})
   }
 
-  return res.status(200).json({qrCodeToken: result})
+  const qrCodePathString = `/checkin/${user_id}/${result}`
+
+  return res.status(200).json({qrCodeToken: result, qrCodePathString})
 });
 
-routes.post("/checkin", async (req, res) => {
+routes.post("/checkin/:id/:qrCodeToken", async (req, res) => {
   if (!req.authenticationInfo.is_admin) {
     return res.status(400).json("Somente um admin pode acessar esse recurso");
   }
 
-  const result = await checkInService(req.authenticationInfo.user_id)
+  const user_id = req.params.id
+  const qrCodeToken = req.params.qrCodeToken
+
+  const result = await checkInService(user_id, qrCodeToken)
 
   if (result instanceof Error) {
     return res.status(400).json({message: result.message})

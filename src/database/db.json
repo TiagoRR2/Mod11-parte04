@@ -9,7 +9,13 @@
       "phone": "999999999",
       "address": "rua a, 123",
       "is_admin": true,
-      "user_subscriptions": []
+      "user_subscriptions": [
+        {
+          "event_id": "2",
+          "checked_in": false,
+          "token": "2768cbbeb24e4994321627b6a4219b088d240cfb35ef0054e849d4f83f18c9a65384431c717eafbb88787becbc539842ef9362daa78a60d87b017cb194a8e833"
+        }
+      ]
     },
     {
       "id": 1,
@@ -34,8 +40,36 @@
       "user_subscriptions": [
         {
           "event_id": "0",
-          "checked_in": false,
+          "checked_in": true,
           "token": "b962b745f8007b0a2468680d629b45a1695eead6ad20f60add473df00cbc0cced510b44fd6cab9d7776abdacdcb8c95476ba5aadedd91333f6642dae2cd36b85"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "username": "fabio",
+      "password_hash": "$2b$12$j1Nj3Kwzo9wlGUIK2VD0vOLuz66KUgnlEmPOZu9bEgGPF8PEvsVUy",
+      "fullname": "Fábio Andrade",
+      "email": "fabio.andrade@alphaedtech.com",
+      "phone": "11111111111",
+      "address": "rua do numero, numero 1, bairro, cidade, MG",
+      "is_admin": false,
+      "user_subscriptions": []
+    },
+    {
+      "id": 4,
+      "username": "fabiooo",
+      "password_hash": "$2b$12$sJa6iwkdFjoWrq9iaZ6LEOeLASbTe6jAdsaNP6xA2IVHU757DP.CW",
+      "fullname": "Fábio Andrade",
+      "email": "fabioo.andrade@alphaedtech.com",
+      "phone": "11111111111",
+      "address": "rua do numero, numero 1, bairro, cidade, MG",
+      "is_admin": false,
+      "user_subscriptions": [
+        {
+          "event_id": "3",
+          "checked_in": true,
+          "token": "0907ff36dffa0f87a88673ece4eeabdde838246f3b35079b77fbe441ee999aa081dbb3fc2ced32306772d551781a92f0219a6f63d206518d37f84f88bd6128dd"
         }
       ]
     }
@@ -47,7 +81,7 @@
       "description": "Aniversário coletivo de todas as pessoas que não fizeram festa durante a pandemia",
       "date": "2021-11-06T19:00:00",
       "created_by": "0",
-      "is_active": true,
+      "is_active": false,
       "subscribers": [
         2
       ]
@@ -60,28 +94,90 @@
       "created_by": "0",
       "is_active": false,
       "subscribers": []
+    },
+    {
+      "id": 2,
+      "title": {
+        "title": "novo evento",
+        "description": "💥 testando",
+        "date_and_time": "2022-02-02T00:00:00",
+        "location": "lá em casa",
+        "creator_id": 0
+      },
+      "is_active": true,
+      "subscribers": [
+        0
+      ]
+    },
+    {
+      "id": 3,
+      "title": {
+        "title": "EXEMPLO de PoSt",
+        "description": "💥🙄😒😦🤑",
+        "date_and_time": "2022-02-02T19:00:00",
+        "location": "Montes Claros - MG",
+        "creator_id": 0
+      },
+      "is_active": true,
+      "subscribers": [
+        4
+      ]
+    },
+    {
+      "id": 4,
+      "title": {
+        "title": "EXEMPLO de PoSt",
+        "description": "💥🙄😒😦🤑",
+        "date_and_time": "2022-02-02T19:00:00",
+        "location": "Montes Claros - MG",
+        "creator_id": 0
+      },
+      "is_active": true,
+      "subscribers": []
+    },
+    {
+      "id": 5,
+      "title": {
+        "title": "EXEMPLO de PoSt",
+        "description": "💥🙄😒😦🤑",
+        "date_and_time": "2022-02-02T19:00:00",
+        "location": "Montes Claros - MG",
+        "creator_id": 0
+      },
+      "is_active": true,
+      "subscribers": []
     }
   ],
   "AuthTokens": [
     {
-      "user_id": 2,
-      "is_admin": false,
-      "token": "73ebfb183e7b3fc1093e7d6f03af733309879f151726de0c53b0231867d3fe85c422e2f33bc4fb368d6a2c56939f6d0aa84178300c8259bb493ec99afb2f6340"
+      "user_id": 0,
+      "is_admin": true,
+      "token": "f08e0e84abe9546c8e2c1951101a797035e56ad2055418ebb0387640271af266637a6529fd2f0402bd6e626990f58837849f8e9dc5c25d59651c29acb0e04691"
     },
     {
-      "user_id": 2,
-      "is_admin": false,
-      "token": "0fd59d99b880ae48ec031d7ce1e3ba450402eaf6065740b1ec47d3f823191ea9491c26ff7b44b73910fc47554306266f4be07d7e2b367db047858182b13d4df4"
+      "user_id": 0,
+      "is_admin": true,
+      "token": "5ae8aeedeb4f6d7777dd242bdc79f65b163ab03b1d10444b3a410d763f02c9cd1296fe608e2365c3834245563090b308142a8a2a37a11cda5fc3350f28fd6ba7"
     },
     {
-      "user_id": 2,
-      "is_admin": false,
-      "token": "cfb4f348975b517160c6835d644f6425a6bf05c7b4a49a3757d836191a8b2735272702ccdacb86da17d93461b0c0ece7e924a298386e5f38d6bb27e40a2e51db"
+      "user_id": 0,
+      "is_admin": true,
+      "token": "27ef0323f23afdb5af2c8b9fc2a98c7d7a30cccd2c2f9e090cf1b5627458b24041454d695bbd843109e2a390f86e1077ff5b6fbde3e394dcb249ef73ac8e709c"
     },
     {
-      "user_id": 2,
+      "user_id": 3,
       "is_admin": false,
-      "token": "f8c5f3a9f23c15a1659c065f1cbbb67205eca9a5652d850a43d8ed2c30b7627a20ccfd1bfa6dfc88bb45440fc0124099ceff0825aac771424f00337cbba8955f"
+      "token": "5734d0513528a34c756c059dd99557a245becf1f96d76f3e38f80b8a4c23ad07e69f8ca53f445affd20a8a6eec2cc111a7dd2e8203e13d25f7ce5b1b8673a01b"
+    },
+    {
+      "user_id": 4,
+      "is_admin": false,
+      "token": "845a99ec1d96b1ff0c0c64af3bac9eb1cc262c76bf3c6afc9d1c9bef53f9703bc467fa0770f0a64ca7d06025a8fb9d85e9bb61755355d88c505d5f209a2ceb54"
+    },
+    {
+      "user_id": 0,
+      "is_admin": true,
+      "token": "f1c90dece354788925cfe3161fc64d4a906bced4af42a2f3fdc22849d110635fdc3915dc85dbd6cddae68e820e481c44f5641e19fd16989b7f54784b40ecce8f"
     }
   ]
 }

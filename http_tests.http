@@ -1,0 +1,95 @@
+###
+POST http://localhost:3000/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+###
+POST http://localhost:3000/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "tiago",
+    "password": "admin"
+}
+
+###
+POST http://localhost:3000/logout HTTP/1.1
+
+###
+POST http://localhost:3000/register
+content-type: application/json
+
+{
+    "username": "fabiooo",
+    "fullname": "Fábio Andrade",
+    "email": "fabioo.andrade@alphaedtech.com",
+    "password": "1234",
+    "phone": "11111111111",
+    "address": "rua do numero, numero 1, bairro, cidade, MG"
+}
+
+
+
+
+
+
+
+
+
+###
+GET http://localhost:3000/events HTTP/1.1
+
+###
+GET http://localhost:3000/events/5 HTTP/1.1
+
+###
+GET http://localhost:3000/users/ HTTP/1.1
+
+###
+GET http://localhost:3000/users/1 HTTP/1.1
+
+###
+GET http://localhost:3000/profile HTTP/1.1
+
+###
+GET http://localhost:3000/users/2/subscriptions HTTP/1.1
+
+###
+GET http://localhost:3000/events/2/subscribers HTTP/1.1
+
+
+
+
+
+
+
+
+
+###
+POST http://localhost:3000/events HTTP/1.1
+content-type: application/json
+
+{
+    "title": "EXEMPLO de PoSt",
+    "description": "💥🙄😒😦🤑",
+    "date_and_time": "2022-02-02T19:00:00",
+    "location": "Montes Claros - MG"
+}
+
+### 
+POST http://localhost:3000/events/3/subscribe HTTP/1.1
+content-type: application/json
+
+###
+POST http://localhost:3000/events/0/end HTTP/1.1
+content-type: application/json
+
+###
+POST http://localhost:3000/checkin/4/0907ff36dffa0f87a88673ece4eeabdde838246f3b35079b77fbe441ee999aa081dbb3fc2ced32306772d551781a92f0219a6f63d206518d37f84f88bd6128dd
+
+###
+GET http://localhost:3000/users

@@ -4,6 +4,9 @@ export async function subscribeUserToEvent({user_id, event_id, token}) {
   await db.read();
   const event = db.data.Events[event_id];
   const user = db.data.Users[user_id];
+  if(!event) {
+    return new Error("O evento em que você está tentando se inscrever não existe")
+  }
 
   const userAlreadySubscribed = user.user_subscriptions.find((subscription) => {
     return event_id === subscription.event_id;
@@ -34,23 +37,27 @@ export async function userCheckIn(user_id, token) {
   await db.read();
   const user = db.data.Users[user_id];
 
+  if(user == undefined || !user.user_subscriptions){
+    return new Error("Token de checkin inválido")
+  }
+
   const checkTokenIndex = user.user_subscriptions.findIndex((subscription) => {
     return token === subscription.token;
   });
-
-  if (!checkTokenIndex || checkTokenIndex == -1) {
+  if (checkTokenIndex == -1) {
     return new Error("Token de checkin inválido");
   }
-
-  const subscription = user.user_subscriptions[validTokenIndex]
+  
+  const subscription = user.user_subscriptions[checkTokenIndex]
   
   if (subscription.checked_in) {
-    return new Error("Usuário já fez check-in");
+    return new Error(`Usuário ${user.username} já fez check-in no evento ${db.data.Events[subscription.event_id].title}`);
   }
 
   subscription.checked_in = true;
 
-  return user.subscription;
+  db.write()
+  return subscription;
 }
 
 

@@ -16,6 +16,7 @@ const port = process.env.PORT || 3000;
 import db from "./database/db-init.js";
 await db.read();
 db.data ||= { Users: [], Events: [], AuthTokens: [] };
+// db.data.AuthTokens = []
 await db.write();
 
 /////=====MIDDLEWARES
